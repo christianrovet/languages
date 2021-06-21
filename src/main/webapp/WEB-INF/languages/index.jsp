@@ -37,9 +37,8 @@
 						<td>
 							<div class="row">
 								<div class="col-sm-6 border-right">
-									<form action="/languages/<c:out value="${language.id}"/>" method="post">
-									<input type="hidden" name="_method" value="delete">
-						    		<input type="submit" class="btn btn-link" value="delete">
+									<form >
+									<a href="/languages/delete/${language.id}">delete</a>
 									</form>
 								</div>
 								<div class="col-sm-6 border-left">

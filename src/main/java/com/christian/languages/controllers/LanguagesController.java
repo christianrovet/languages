@@ -40,13 +40,15 @@ public class LanguagesController {
 	@RequestMapping(value="languages", method=RequestMethod.POST)
 	// @Valid checks for validation
 	// @BindingResult after, checks for errors
-	public String create(@Valid @ModelAttribute("language") Language language, BindingResult result, Model model) {
+	public String create( @ModelAttribute("language") @Valid Language language, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			List<Language> languages = langService.allLanguages();
 			model.addAttribute("languages", languages);
+			System.out.println("if check");
 			return "/languages/index.jsp";
 		}else {
 			langService.createLang(language);
+			System.out.println("else check");
 			return "redirect:/languages";
 		}
 	}
@@ -69,12 +71,12 @@ public class LanguagesController {
 	}
 
 	
-	// PUT route for update by id
-	@RequestMapping(value="languages/{id}", method=RequestMethod.PUT)
+	// POST route for update by id
+	@RequestMapping(value="languages/edit/{id}", method=RequestMethod.POST)
 	public String update(@Valid @ModelAttribute("language") Language language,BindingResult result, @PathVariable("id") Long id,
 			@RequestParam(value="name") String name, @RequestParam(value="creator") String creator, @RequestParam(value="version") String version){
-		
-		if (result.hasErrors()) {
+		boolean error = result.hasErrors();
+		if (error) {
 			return "languages/edit.jsp";
 		} else {
 			langService.updateLang(id, name, creator, version);
@@ -82,7 +84,7 @@ public class LanguagesController {
 		}
 	}
 	// DELETE Route by id
-		@RequestMapping(value="/languages/{id}", method= {RequestMethod.DELETE,RequestMethod.POST})
+		@RequestMapping(value="/languages/delete/{id}")
 		public String destory(@PathVariable("id") Long id) {
 			// Queries and deletes language from PathVariable
 			langService.deleteLang(id);

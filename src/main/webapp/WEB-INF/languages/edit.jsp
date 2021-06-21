@@ -33,7 +33,7 @@
 		
 		<div class="row justify-content-center">
 			<div class="col-4 p-2">
-				<form:form action="/languages/${language.id}" method="post" modelAttribute="language">
+				<form:form action="/languages/edit/${language.id}" method="post" modelAttribute="language">
 		    	<input type="hidden" name="_method" value="put">
 		<div class="row justify-content-start">
 			<div class="col-6">

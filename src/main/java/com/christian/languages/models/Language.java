@@ -1,7 +1,8 @@
 package com.christian.languages.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotEmpty;
+
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,13 +13,14 @@ public class Language {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Size(min = 2, max = 20)
+	@NotEmpty (message = "cannot be empty")
 	private String name;
-	@Size(min = 2, max = 20)
+	@NotEmpty (message = "cannot be empty")
 	private String creator;
-	@NotBlank(message = "cannot be empty")
+	@NotEmpty (message = "cannot be empty")
 	private String version;
 	@Column(updatable = false)
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
